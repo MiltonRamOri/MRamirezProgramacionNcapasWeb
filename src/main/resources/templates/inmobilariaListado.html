@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layaout"
+      layout:decorate="~{layout}"> 
+
+
+    <body layout:fragment="body">
+
+        <h1>Lista de Tipo de Inmueble</h1>
+
+
+        <div class="d-flex justify-content-center align-items-center">
+            <a th:href="@{/inmobilaria/forminmobilaria/{idtipoinmueble}(idtipoinmueble = 0)}" class="btn btn-success">Agregar</a>
+        </div>
+        <br>
+        <div class="container-fluid">
+            <table class="table table-hover  table table-sm table table-borderless">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Eliminar</th>
+                        <th scope="col">IdTIpoInmueble</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tipoinmueble : ${tipoinmuebles}">
+                        <td>
+                            <a class="btn btn-danger" th:href="@{/inmobilaria/eliminarTipoInmueble/{idtipoinmueble}(idtipoinmueble=${tipoinmueble.idtipoinmueble})}">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </td>
+                        <td th:text="${tipoinmueble.idtipoinmueble}"></td>
+                        <td th:text="${tipoinmueble.nombre}"></td>
+                        <td>
+
+                            <a class="btn btn-warning" th:href="@{/inmobilaria/forminmobilaria/{idtipoinmueble}(idtipoinmueble=${tipoinmueble.idtipoinmueble})}">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </body>
+</html>

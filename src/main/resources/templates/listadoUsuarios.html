@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layaout"
+      layout:decorate="~{layout}"> 
+
+
+    <body layout:fragment="body">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <div class="container text-center">
+            <br>
+            <h1>Lista de usuarios</h1>
+            <br>
+        </div>
+
+        <br>
+        <div class="container text-center">
+            <form th:action="@{/usuario/listado}" method="post" th:object="${usuariobusqueda}">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group mb-4">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+                            <!--here-->
+                            <input type="text" class="form-control rounded" placeholder="Nombre" id="txtNombre" th:field="*{nombre}" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-4">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+                            <input type="text" class="form-control rounded" placeholder="Apellido Paterno" id="txtApellidoPaterno" name="ApellidoPaterno" th:field="*{apellidopaterno}" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-4">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+                            <input type="text" class="form-control rounded" placeholder="Apellido Materno" id="txtApellidoMaterno" name="ApellidoMaterno" th:field="*{apellidomaterno}" />
+                        </div>
+                        <label id="lblApellidoMaterno"></label>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-4">
+                            <input class="btn btn-info" type="submit" value="Buscar" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="d-flex justify-content-center align-items-center">
+            <a th:href="@{/usuario/form/{idusuario}(idusuario = 0)}" class="btn btn-success">Agregar</a>
+        </div>
+        <br>
+
+        <div class="container">
+            <div class="table-responsive">
+                <table id="mitabla" class="table table-hover table-sm table-borderless table-rounded table-light">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Eliminar</th>
+                            <th>Nombre</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Usuario</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Sexo</th>
+                            <th>Teléfono</th>
+                            <th>Celular</th>
+                            <th>CURP</th>
+                            <th>Rol</th>
+                            <th>Imagen</th>
+                            <th>Status</th>
+                            <th>Editar</th>
+                            <th>Dirección</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="usuario : ${usuarios}">
+                            <td>
+                                <a class="btn btn-danger" th:href="@{/usuario/eliminarUsuario/{idusuario}(idusuario=${usuario.idusuario})}">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </td>
+                            <td th:text="${usuario.nombre} + ' ' + ${usuario.apellidopaterno} + ' ' + ${usuario.apellidomaterno}"></td>
+                            <td th:text="${usuario.fechanacimiento}"></td>
+                            <td th:text="${usuario.username}"></td>
+                            <td th:text="${usuario.email}"></td>
+                            <td th:text="${usuario.password}"></td>
+                            <td th:text="${usuario.sexo}"></td>
+                            <td th:text="${usuario.telefono}"></td>
+                            <td th:text="${usuario.celular}"></td>
+                            <td th:text="${usuario.curp}"></td>
+                            <td th:text="${usuario.rol.nombre}"></td>
+                            <td>
+                                <img th:if="${usuario.imagen == null}" src="/imagen/logo.png" width="50" height="50" alt="Imagen de Usuario">
+                                <img th:unless="${usuario.imagen == null}" th:src="'data:image/png;base64,' + ${usuario.imagen}" width="50" height="50" alt="Imagen de Usuario" />
+                            </td>
+                            <td>
+                                <div th:if="${usuario.status == 'N'}" class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" th:id="${usuario.idusuario}" onchange="ChangeStatus(this)">
+                                </div>
+                                <div th:unless="${usuario.status == 'N'}" class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" th:id="${usuario.idusuario}" onchange="ChangeStatus(this)" checked>
+                                </div>
+                            </td>
+                            <td>
+                                <a class="btn btn-warning" th:href="@{/usuario/form/{idusuario}(idusuario=${usuario.idusuario})}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                            </td>
+                            <td> 
+                                <span th:each="direccion : ${direcciones}"
+                                      th:if="${usuario.idusuario == direccion.usuario.idusuario}">
+                                    <span th:text="${direccion.calle} + ',' + ${direccion.numerointerior} + ',' + ${direccion.numeroexterior}
+                                           + ',' + ${direccion.colonia.nombre} + ',' + ${direccion.colonia.municipio.nombre}
+                                           + ',' + ${direccion.colonia.municipio.estado.nombre} + ',' + ${direccion.colonia.municipio.estado.pais.nombre}"></span> 
+                                </span>
+                                
+                                
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+<style>
+    .table {
+        border-radius: 10px;
+    }
+    .table {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+</style>
+
+
+<script>
+
+
+    function ChangeStatus(e) {
+        var status = e.checked
+        var idUsuario = e.id
+        $.ajax({
+            type: "GET",
+            url: "/usuario/ChangeStatus", // La URL del controlador
+            dataType: "json",
+            data: {idUsuario: idUsuario, status: status},
+            success: {},
+            error: {
+
+            }
+
+
+        });
+
+    }
+
+    $(document).ready(function () {
+        $('#mitabla').DataTable();
+    });
+</script>

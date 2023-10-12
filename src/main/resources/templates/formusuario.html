@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <br>
+        <div class="container">
+            <form th:action="@{/usuario/addusuario}" method="post" th:object="${usuario}">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">Navbar</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link" href="#">Features</a>
+                                <a class="nav-link" href="#">Pricing</a>
+                                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group  mb-3 ">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+                            <!--here-->
+                            <input type="text" class="form-control " placeholder="Nombre"  id="nombre" name="nombre" th:field="*{nombre}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+                            <input type="text" class="form-control" placeholder="Apellido Paterno" id="apellidopaterno" name="apellidopaterno" th:field="*{apellidopaterno}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+
+                            <input type="text" class="form-control" placeholder="Apellido Materno"  id="apellidomaterno" name="apellidomaterno" th:field="*{apellidomaterno}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-calendar-event-fill"></i></span>
+
+                            <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" th:field="*{fechanacimiento}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                            <!--here-->
+                            <input type="text" class="form-control" placeholder="Username"  id="username" name="username" th:field="*{username}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-at-fill"></i></span>
+                            <!--here-->
+                            <input type="text" class="form-control" placeholder="Email"  id="email" name="email" th:field="*{email}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-lock-fill"></i></span>
+                            <!--here-->
+                            <input type="text" class="form-control" placeholder="Password"  id="password" name="password" th:field="*{password}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-gender-ambiguous"></i></span>
+                            <!--here-->
+                            <input type="text" class="form-control" placeholder="Sexo"  id="sexo" name="sexo" th:field="*{sexo}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone-fill"></i></span>
+                            <!--here-->
+                            <input type="text" class="form-control" placeholder="Telefono"  id="telefono" name="telefono" th:field="*{telefono}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-phone-fill"></i></span>
+                            <!--here-->
+                            <input type="text" class="form-control" placeholder="Celular"  id="celular" name="celular" th:field="*{celular}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-person-fill"></i></span>
+                            <!--here-->
+                            <input type="text" class="form-control" placeholder="Curp"  id="curp" name="curp" th:field="*{curp}"/>
+                        </div>
+                    </div>    
+                    <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-controller"></i></span>
+                            <!--here-->
+                            <input type="number" class="form-control" placeholder="Idrol"  id="idrol" name="idrol" th:field="*{rol.idrol}"/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <input class="btn btn-success" type="submit" value="Guardar"/>
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>
