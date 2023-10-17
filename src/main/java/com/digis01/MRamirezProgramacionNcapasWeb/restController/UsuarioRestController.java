@@ -27,13 +27,30 @@ public class UsuarioRestController {
         this.usuarioDAOImplementation = usuarioDAOImplementation;
     }
     
-    @GetMapping("/GetAll")
+    @PostMapping("/GetAll")
     public List<Usuario> GetAll(@RequestBody Usuario usuario) {
-        
-        
-        return usuarioDAOImplementation.GetAll(new Usuario(usuario.getNombre(), usuario.getApellidopaterno(), usuario.getApellidopaterno()));
+//        LoginResponse respuestaLogin;
+
+        return usuarioDAOImplementation.GetAll(usuario);
         
     }
+    @PostMapping("/Add")
+    public int Add(@RequestBody Usuario usuario) {
+        return usuarioDAOImplementation.Add(usuario);
+        
+
+    }
+     @PostMapping("/Update/{idusuario}")
+    public Usuario GetById(int idusuarioeditable) {
+
+        return usuarioDAOImplementation.GetById(idusuarioeditable);
+    }
+    
+   
+//    public void Update(@RequestBody int idusuario) {
+//        Usuario usuario = usuarioDAOImplementation.GetById(idusuario);
+//        
+//    }
     
     
 }
